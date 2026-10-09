@@ -1,3 +1,5 @@
+Before starting a task, read `docs/README.md`: it maps each task to the docs, mockups, and skills to read.
+
 ## Agent skills
 
 ### Issue tracker
