@@ -1,24 +1,40 @@
-# README
+# Incident Desk
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+```sh
+bin/setup
+```
 
-* Ruby version
+## Users and roles
 
-* System dependencies
+Sign-in uses Rails' built-in authentication. Each user has exactly one role, `customer` or `agent`
+(managed with `rolify`). There is no password-reset flow.
 
-* Configuration
+### Demo users
 
-* Database creation
+`bin/rails db:seed` creates a demo customer and a demo agent. Their passwords are read from
+environment variables and are never stored in the code. A demo user is skipped if its password is not set.
 
-* Database initialization
+| Variable                 | Purpose                                                 |
+| ------------------------ | ------------------------------------------------------- |
+| `DEMO_CUSTOMER_PASSWORD` | Password for the demo customer                          |
+| `DEMO_AGENT_PASSWORD`    | Password for the demo agent                             |
+| `DEMO_CUSTOMER_EMAIL`    | Optional. Defaults to `customer@example.com`            |
+| `DEMO_AGENT_EMAIL`       | Optional. Defaults to `agent@example.com`               |
 
-* How to run the test suite
+### Creating a user
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+bin/rails "users:create[someone@example.com,agent]"
+```
 
-* Deployment instructions
+The task prompts for the password. In a non-interactive shell, set `PASSWORD` instead.
+Never pass the password as a task argument. The task fails if the role is not `customer` or `agent`,
+or if the email is already taken.
 
-* ...
+## Tests
+
+```sh
+bin/rails test
+```

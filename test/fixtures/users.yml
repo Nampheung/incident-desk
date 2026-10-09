@@ -1,0 +1,12 @@
+# Passwords are generated per test run (see test/test_helper.rb), never hardcoded.
+<% password_digest = BCrypt::Password.create(ENV.fetch("TEST_USER_PASSWORD"), cost: BCrypt::Engine::MIN_COST) %>
+
+customer:
+  email_address: customer@example.com
+  password_digest: <%= password_digest %>
+  roles: customer
+
+agent:
+  email_address: agent@example.com
+  password_digest: <%= password_digest %>
+  roles: agent

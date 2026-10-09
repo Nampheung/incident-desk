@@ -1,1 +1,100 @@
 @import "tailwindcss";
+
+/* Incident Desk design system, ported from docs/design/styles.css. */
+
+@theme {
+  --font-sans: "Public Sans", system-ui, sans-serif;
+
+  --color-bg: #F4F4F1;
+  --color-surface: #FFFFFF;
+  --color-border: #E2E2DC;
+  --color-border-strong: #C9C9C2;
+  --color-border-hover: #A9A9A2;
+  --color-row-line: #EFEFEA;
+  --color-text: #1A1A18;
+  --color-muted: #5C5C57;
+  --color-accent: #1F4F99;
+  --color-accent-dark: #163A73;
+  --color-success: #1C6B43;
+  --color-danger: #A3170D;
+  --color-danger-bg: #FDE2E0;
+}
+
+@layer base {
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 15px;
+  }
+
+  a { color: var(--color-accent); }
+  a:hover { color: var(--color-accent-dark); }
+
+  h1 { margin: 0; font-size: 26px; font-weight: 700; }
+  h2 { margin: 0; }
+}
+
+@layer components {
+  /* ---------- App header ---------- */
+  .topbar { background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+  .topbar-inner {
+    max-width: 1160px; margin: 0 auto; padding: 0 24px; min-height: 60px;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .brand {
+    font-size: 15px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--color-accent); text-decoration: none;
+  }
+  .user { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--color-muted); }
+  .user .button_to { margin: 0; }
+
+  /* ---------- Layout ---------- */
+  .page { max-width: 1160px; margin: 0 auto; padding: 32px 24px; display: flex; flex-direction: column; gap: 20px; }
+  .page-narrow { max-width: 640px; }
+  .page-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+
+  .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; }
+  .card-pad { padding: 24px; }
+  .empty-state { color: var(--color-muted); text-align: center; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    height: 44px; padding: 0 18px; display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 6px; border: 1px solid transparent; font: inherit; font-size: 15px; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-primary { background: var(--color-accent); color: #FFFFFF; }
+  .btn-primary:hover { background: var(--color-accent-dark); color: #FFFFFF; }
+  .btn-plain { background: var(--color-surface); color: var(--color-text); border-color: var(--color-border-strong); font-weight: 500; }
+  .btn-plain:hover { color: var(--color-text); border-color: var(--color-border-hover); }
+  .btn-sm { height: 36px; padding: 0 14px; font-size: 14px; }
+  .btn-block { width: 100%; }
+
+  /* ---------- Forms ---------- */
+  .form { display: flex; flex-direction: column; gap: 20px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .label { font-size: 14px; font-weight: 600; }
+  .hint { font-size: 13px; color: var(--color-muted); }
+  .input, .select, .textarea {
+    width: 100%; border: 1px solid var(--color-border-strong); border-radius: 6px; background: var(--color-surface);
+    font: inherit; font-size: 15px; color: var(--color-text);
+  }
+  .input, .select { height: 44px; padding: 0 12px; }
+  .textarea { padding: 10px 12px; resize: vertical; }
+  .form-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; }
+
+  /* ---------- Alerts ---------- */
+  .alert-error {
+    background: var(--color-danger-bg); color: var(--color-danger); border-radius: 6px;
+    padding: 10px 12px; font-size: 14px; font-weight: 500;
+  }
+  .notice-success { font-size: 14px; color: var(--color-success); font-weight: 600; }
+
+  /* ---------- Sign in ---------- */
+  .auth { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .auth-card { width: 100%; max-width: 400px; padding: 32px; }
+  .auth-heading { display: flex; flex-direction: column; gap: 4px; }
+  .auth-brand { font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-accent); }
+}
