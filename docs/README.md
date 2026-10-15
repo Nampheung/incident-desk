@@ -13,7 +13,7 @@ Where to look before you start a task. Paths are relative to this file. Entries 
 | Add the overdue escalation job or audit events | [requirements.md](requirements.md) §3.4–3.5, [user-stories.md](user-stories.md) Story 6                                               |
 | Create, read, or update GitHub issues          | [agents/issue-tracker.md](agents/issue-tracker.md)                                                                                    |
 | Name a domain concept or record a decision     | [agents/domain.md](agents/domain.md), `GLOSSARY.md` (_created later_), `adr/` (_created later_)                                       |
-| Finish a ticket or open a PR                   | [definition-of-done.md](definition-of-done.md)                                                                                        |
+| Finish a ticket or open a PR                   | [definition-of-done.md](definition-of-done.md), [pull-requests.md](pull-requests.md)                                                  |
 | Review a branch or PR                          | [requirements.md](requirements.md), [user-stories.md](user-stories.md), skill `code-review`                                           |
 | Set up the app, seed users, run tests          | [../README.md](../README.md)                                                                                                          |
 | Write or change code                           | `../.claude/rules/` (_created later_)                                                                                                 |
@@ -46,6 +46,7 @@ Read [definition-of-done.md](definition-of-done.md) twice per ticket:
 | [requirements.md](requirements.md)             | Roles, functional requirements, out-of-scope list                           |
 | [user-stories.md](user-stories.md)             | Stories 1–6 with acceptance criteria                                        |
 | [definition-of-done.md](definition-of-done.md) | Checklist a ticket must pass before merge                                   |
+| [pull-requests.md](pull-requests.md)           | How to write a PR title and description; template in `../.github/`          |
 | [agents/issue-tracker.md](agents/issue-tracker.md) | `gh` commands and conventions for issues                                |
 | [agents/domain.md](agents/domain.md)           | How to use the glossary and ADRs                                            |
 | [../README.md](../README.md)                   | Setup, users and roles, demo users, tests                                   |
