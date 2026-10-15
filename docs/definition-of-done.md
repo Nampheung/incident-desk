@@ -27,6 +27,7 @@ A ticket is done when every item below is checked. If an item does not apply, wr
 - [ ] `bin/rubocop` passes.
 - [ ] The diff adds no `rubocop:disable` comments.
 - [ ] The diff has no leftover `debugger`, `binding.irb`, or `console.log`.
+- [ ] Each new model validation has a matching database constraint: `null: false`, a foreign key, or a unique index.
 - [ ] Domain names (models, methods, tests) use the terms in `GLOSSARY.md`, once that file exists.
 - [ ] _(optional)_ Real-time updates use Turbo Streams or broadcasts, with no hand-written WebSocket JavaScript.
 
@@ -49,14 +50,16 @@ A ticket is done when every item below is checked. If an item does not apply, wr
 - [ ] `git ls-files config/*.key` prints nothing.
 - [ ] New sensitive parameters are added to `config/initializers/filter_parameter_logging.rb`.
 - [ ] User-entered text (titles, descriptions, comments) is rendered escaped, with no `raw` or `html_safe` on it.
+- [ ] Seeds, fixtures, and tests use made-up data only, such as `@example.com` addresses. No real customer or employee data.
 
 ## Operations
 
 - [ ] `bin/setup --skip-server` succeeds on a fresh clone.
 - [ ] Background jobs inherit from `ApplicationJob` and run on Solid Queue, the database queue. No other queue adapter is added.
 - [ ] Each new environment variable is listed in the root [README.md](../README.md) table, and the app handles it being unset.
-- [ ] `GET /up` returns 200.
-- [ ] _(optional)_ Each new migration passes `bin/rails db:migrate:redo`, and the matching `db/schema.rb` change is committed.
+- [ ] With `bin/dev` running, `curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/up` prints `200`.
+- [ ] `RAILS_ENV=test bin/rails db:migrate:redo STEP=<number of new migrations>` passes, and the matching `db/schema.rb` change is committed. Run it against the test database so it does not drop development data.
+- [ ] `git diff --diff-filter=M main...HEAD -- db/migrate` prints nothing: no migration already on `main` is edited.
 - [ ] _(optional)_ `bin/kamal deploy` succeeds. Deployment is not set up yet: `config/deploy.yml` still has a placeholder server and registry.
 
 ## Documentation
@@ -69,8 +72,12 @@ A ticket is done when every item below is checked. If an item does not apply, wr
 ## Delivery
 
 - [ ] `bin/ci` passes locally with every step green. It is the only CI: the repo has no GitHub Actions.
-- [ ] The work is on a branch off `main`, and the GitHub issue is linked from the PR.
+- [ ] The work is on a branch off `main`, and the GitHub issue is linked from the PR. The issue is in the repository the PR targets: a fork and its upstream number issues separately.
 - [ ] _(optional)_ Commit messages follow the `type(scope): Subject` style from the git history.
 - [ ] _(optional)_ The `code-review` skill was run against `main`, and its findings are fixed or answered.
 - [ ] _(optional)_ `gh signoff` sets a green commit status. This step is commented out in `config/ci.rb`.
-- [ ] _(optional)_ The PR body has `Closes #<issue>`, so the issue closes on merge.
+- [ ] **Last step:** the PR is open, and its body follows [`.github/pull_request_template.md`](../.github/pull_request_template.md), written as [pull-requests.md](pull-requests.md) describes:
+  - The title has the form `type(scope): Subject` and is under 72 characters.
+  - Every template section is filled in, and _Risks / notes_ says **None.** when there are none.
+  - The body has `Closes #<issue>`, so the issue closes on merge.
+  - This checked list is pasted into the _Definition of done_ block.

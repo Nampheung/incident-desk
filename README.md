@@ -40,3 +40,5 @@ or if the email is already taken.
 ```sh
 bin/rails test
 ```
+
+Update
