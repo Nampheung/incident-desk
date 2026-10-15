@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_15_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_15_100000) do
   create_table "roles", force: :cascade do |t|
     t.string "name", null: false
     t.string "resource_type"
@@ -44,7 +44,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_090000) do
     t.integer "role_id", null: false
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", unique: true
-    t.index ["user_id"], name: "index_users_roles_on_user_id"
+    t.index ["user_id"], name: "index_users_roles_on_user_id", unique: true
   end
 
   add_foreign_key "sessions", "users"

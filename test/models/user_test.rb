@@ -35,11 +35,29 @@ class UserTest < ActiveSupport::TestCase
     assert_not new_user(role: nil).valid?
   end
 
-  test "a user cannot hold more than one role" do
-    user = users(:customer)
-    user.add_role(:agent)
+  test "the database refuses a second role for a user" do
+    assert_raises(ActiveRecord::RecordNotUnique) { users(:customer).add_role(:agent) }
 
-    assert_not user.valid?
+    assert users(:customer).reload.customer?
+  end
+
+  test "an invalid role on a saved user keeps the current role" do
+    user = users(:customer)
+    user.role = "admin"
+
+    assert_not user.save
+    assert user.reload.customer?
+  end
+
+  test "changing the role of a saved user takes effect on save" do
+    user = users(:customer)
+    user.role = "agent"
+
+    assert User.find(user.id).customer?, "role must not change before save"
+
+    user.save!
+    assert user.reload.agent?
+    assert_equal 1, user.roles.count
   end
 
   test "the database allows only one role row per name" do

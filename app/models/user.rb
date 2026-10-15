@@ -9,15 +9,21 @@ class User < ApplicationRecord
 
   validates :email_address, presence: true, uniqueness: { case_sensitive: false },
     format: { with: URI::MailTo::EMAIL_REGEXP }
-  validate :must_have_exactly_one_role
+  validates :role, inclusion: { in: ROLES, message: "must be one of: #{ROLES.join(", ")}" }
+
+  after_save :save_role, if: -> { @role }
 
   def role
-    roles.first&.name
+    @role || roles.first&.name
   end
 
   def role=(name)
-    name = name.to_s
-    self.roles = ROLES.include?(name) ? [ Role.find_or_create_by!(name: name) ] : []
+    @role = name.to_s
+  end
+
+  def reload(*)
+    @role = nil
+    super
   end
 
   def customer?
@@ -29,9 +35,8 @@ class User < ApplicationRecord
   end
 
   private
-    def must_have_exactly_one_role
-      unless roles.size == 1 && ROLES.include?(roles.first.name)
-        errors.add(:role, "must be one of: #{ROLES.join(", ")}")
-      end
+    def save_role
+      self.roles = [ Role.find_or_create_by!(name: @role) ]
+      @role = nil
     end
 end
