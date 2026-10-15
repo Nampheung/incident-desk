@@ -76,6 +76,12 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_session_path
   end
 
+  test "signed-out visitors cannot log out" do
+    delete session_path
+
+    assert_redirected_to new_session_path
+  end
+
   test "there is no password-reset flow" do
     get "/passwords/new"
 

@@ -23,6 +23,7 @@ environment variables and are never stored in the code. A demo user is skipped i
 | `DEMO_CUSTOMER_EMAIL`    | Optional. Defaults to `customer@example.com`            |
 | `DEMO_AGENT_EMAIL`       | Optional. Defaults to `agent@example.com`               |
 | `PASSWORD`               | Optional. Password for `users:create`; prompted for if unset |
+| `TEST_USER_PASSWORD`     | Optional. Fixture user password in tests; random if unset |
 
 ### Creating a user
 

@@ -42,6 +42,10 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.valid?
   end
 
+  test "the database allows only one role row per name" do
+    assert_raises(ActiveRecord::RecordNotUnique) { Role.insert!({ name: "customer" }) }
+  end
+
   test "role helpers" do
     assert users(:customer).customer?
     assert_not users(:customer).agent?
