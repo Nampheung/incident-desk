@@ -22,6 +22,7 @@ environment variables and are never stored in the code. A demo user is skipped i
 | `DEMO_AGENT_PASSWORD`    | Password for the demo agent                             |
 | `DEMO_CUSTOMER_EMAIL`    | Optional. Defaults to `customer@example.com`            |
 | `DEMO_AGENT_EMAIL`       | Optional. Defaults to `agent@example.com`               |
+| `PASSWORD`               | Optional. Password for `users:create`; prompted for if unset |
 
 ### Creating a user
 
